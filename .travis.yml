@@ -1,0 +1,34 @@
+version: "~> 1.0"
+os: linux
+language: shell
+services: docker
+notifications:
+  email:
+    on_success: never
+    on_failure: never
+  slack:
+    if: branch = master
+    rooms:
+      secure: Z0swEKzmSDxW0v++c0aYjx1hAyFeEnjlxQPW7dMkpE0QOLRhnohIBlHCjiZuBzsl8zRW93LlmKaOUe/EJ8LDn/Gy5Ov5l+KAJRs1pAfFjrjMA1fCAilJFcI9l3La1N9ny7kFsxIUBX7+QoWCLbU2heaCiRctR0Or+KhEJ1x7xIgD/1U/o7h4Zt0dAQM4Kwjw9Cz/UMIijQvZku23H8juD/AzlAyLYlbsI9rqzTblSMVotH2euio1X+HaHtkNcBsRt7GQJc59sRishiTU5HwNwCFytANH1TI93ryaAS+8/VKeifsva2zRFvSoGqV+D5zAL87tx5sAkLnRLelmgmyAGk21Mmk56QtZweDmw9urKXKo1rUciBEfILCbu3AMOR/fSwgAUwaDl1O1HTA2B+TtYRrPfxowQOKu38WF2UQPqHfAfbrUj67LRnijiZYJXFz6r2Dev2x8TW0Uf94YSXaG/p1yMHphfbfV6wSXynrXnoXKXpbzZsfLLov9HPrkfqHWSa1ghVfoxpfF0e2mfimfyDVISjRD0h+441cKNhgudR5pWQZmc0fJvFMdCzxIa1gnG3dC9h5v1y8HwlWg+VLIRB00fJ75CE5XSOi1L75u9NA/7Mhk12Byn2NReBae3oe23DWY19yS7HiB+R2sVNn35pF6s4hXJik2CItN+eXOqiI=
+    template:
+      - "%{commit_subject}"
+      - build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) @%{branch}
+      - by %{author} %{result} in %{duration}
+    on_success: change
+    on_failure: always
+env:
+  global:
+    - secure: FM1CsccvkFmXJXaf/FnoikN2f/shDOGGQd7jix+0l2l1c6dDomL7oF6YaNi2Fy4AtouGxVZ2x/T35IagKWVmEnXHibVVHzwB424TN2LmJzDzFZCMqSwQoDjCqi2u28+SR3wMZl6K/0tcVYI4ap/Pfmw5shcM1O5ym+Hd1iVmCuFx4YqLOf/hj2X6id4tHoWe4yilTcpO8Gx1u/u8/833cEorvp/EAa1HpmdYWnOtLsd5IUki83XmsZWr3t0jzOYzQVZBTo+jGGuovwBIonJMwd0UL9XicZcdoIzFE49H5RUlCZu03zKzcBdmLmx9ohYPWjb5+n0b+kWrDMiFEnB4pp45eYITPlfunIKIXkdlQrMyqjjvWk9sqjOmidbORW/0R2nELpGfrG7kNPJuOSI5x2byUKTw6D6msUAl2tIevg4X5AFJzAep7s9bMuh7icX6wh9PloR6lOMnqp6UuPCITVDKfsQkafPXgfdOmDqa92XljMTFTV7cMoWRGJ/QcnJEAD5hd03Sl7JjECBItDveklAPHVN2uGxsdZFcO/hmARgxfZrSkUIpZ8U0F/6r7MYgm1FpKtsnH5X6BcJb9nAxZsUaAhrF6Fhj3NS5ttYTxNVp3FVmrY06ygfZ92eTHwEgYzAMFZ1fsoNlYXrSsjxWNraDNq/lG0pi08PbKwdutMU=
+    - secure: DW+qbabhzH+UOp9USdx12mnO2KA58d5Z+2Y9wDJbNaP1Ux3NwCmFFTm8kTgKgJcvQXwx7tCsvMRr35x5vxEzdRhCtDjNDXPOdmhECUnpUK4TL1BhjGnaVAvgV0q3qx1PY0w4pKHkBRfTzpxOTUxMKCrDkQhWvRjuycJF3RGG1/xY0ArDyqtxP+VzLa0DXGLdULd9Yjq2isBlcIWYeFqPJelGu3yxwF9n1alynO3c4JUPUtssPGvl3WsEFTmw3QixwXenMVVv6PTSvd+6jkxb67Qydy58ObdO2tfnGOD7kQbXRn1kkGhkXm4YvivWmfs1dEs17Z2f2GjK2Nu+17g5V8FquvCK9VFsFZtsGHS/nwfAPJrA6L9Sf6OGniFj52RGF8pE0F/3UMu7nVDKOluM329buazo1nygy3P85OylsPcrtu6jPPsCHBSaf6dx2M+KCiufbbGXS/Oz2JJCRGaV84XcNMLQH8o5FVaPG5MnHFCAXnvWoiBrdzuOJ5G+Cxxe7nMTXesfwmx8VuqzMSQjN+Jwqh1TddGB+jsj+aBe7jCw2s2IMmEU+QHyczuZRj6WtBiFeNljvIgIHG+KkVXx+MAQkS+OkyRMVPpxnrhQlsKiFhzpTTsWGq1+sjLuRryG0eA4cggvL8LmKi5ZImhEKFf0R+c/S2SUMP0lyJG5Ki4=
+before_install: curl -sSL https://raw.githubusercontent.com/ckaserer/bash-script-collection/master/bash-fetch-script-collection.sh | bash
+script: ".ci/test.sh"
+deploy:
+  provider: script
+  script: bash bash-script-collection/docker-push-image.sh \
+    --docker-org ckaserer \ 
+    --docker-repo cookiecutter \
+    --docker-user ${DOCKER_USER} \
+    --docker-pass ${DOCKER_PASS}
+  skip_cleanup: true
+  on:
+    branch: master
