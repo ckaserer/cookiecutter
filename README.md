@@ -1,12 +1,11 @@
 
 # Cookiecutter
 [![Build Status](https://travis-ci.com/ckaserer/cookiecutter.svg?branch=master)](https://travis-ci.com/ckaserer/cookiecutter)
-![Docker Pulls](https://img.shields.io/docker/pulls/ckaserer/cookiecutter)
-![GitHub](https://img.shields.io/github/license/ckaserer/cookiecutter)
 ![Maintenance](https://img.shields.io/maintenance/yes/2020)
+![GitHub](https://img.shields.io/badge/license-GPL%20v3.0-brightgreen.svg)
+![Docker Pulls](https://img.shields.io/docker/pulls/ckaserer/cookiecutter)
 
-
-A command-line utility that creates projects from **cookiecutters** (project templates), e.g. creating a Python package project from a Python package project template.
+Cookiecutter is a command-line utility that creates projects from **cookiecutters** (project templates), e.g. creating a Python package project from a Python package project template.
 
 * Documentation: [https://cookiecutter.readthedocs.io](https://cookiecutter.readthedocs.io)
 * GitHub: [https://github.com/cookiecutter/cookiecutter](https://github.com/cookiecutter/cookiecutter)
