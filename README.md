@@ -25,9 +25,14 @@ Did someone say features?
 * Project templates can be in any programming language or markup format:  
   Python, JavaScript, Ruby, CoffeeScript, RST, Markdown, CSS, HTML, you name it. You can use multiple languages in the same project template.
 
-* Simple command line usage:
+* Simple command line usage for containerized version:
 
 ```bash
+# First you need to source the cookiecutter bash function wrapping the
+# docker command for ease of use.
+# We recommend you put the source command in your bashrc to avoid 
+# sourcing the bashrc manually.
+$ source /path/to/git/repo/bashrc
 # Create project from the cookiecutter-pypackage.git repo template
 # You'll be prompted to enter values.
 # Then it'll create your Python package in the current working directory,
@@ -40,6 +45,11 @@ $ cookiecutter gh:audreyr/cookiecutter-pypackage
 * Use it at the command line with a local template:
 
 ```bash
+# First you need to source the cookiecutter bash function wrapping the
+# docker command for ease of use.
+# We recommend you put the source command in your bashrc to avoid 
+# sourcing the bashrc manually.
+$ source /path/to/git/repo/bashrc
 # Create project in the current working directory, from the local
 # cookiecutter-pypackage/ template
 $ cookiecutter cookiecutter-pypackage/
